@@ -35,6 +35,11 @@ public:
   std::size_t size() const { return sections_.size(); }
 
   /**
+   * @brief Getter for sections
+   */
+  auto getSections() const { return sections_; }
+
+  /**
    * @brief Getter for materialNo
    */
   int getMaterialNumber() const { return materialNo; }

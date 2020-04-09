@@ -36,7 +36,15 @@ PYBIND11_MODULE(ENDFtk, m) {
     .def("hasSection", &GendfMaterial::hasSection)
     .def("size", &GendfMaterial::size)
     .def_property_readonly("materialNumber",
-                           &GendfMaterial::getMaterialNumber);
+                           &GendfMaterial::getMaterialNumber)
+    .def_property_readonly("sections",
+                           &GendfMaterial::getSections);
+
+  py::class_< GendfSection >(m, "GendfSection")
+    .def_property_readonly("fileNumber",
+                           &GendfSection::fileNo)
+    .def_property_readonly("sectionNumber",
+                           &GendfSection::sectionNo);
 
 
 }
