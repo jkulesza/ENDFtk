@@ -31,4 +31,9 @@ public:
    */
   std::size_t size() const { return materials_.size(); }
 
+  /**
+   * @brief Getter for materials
+   */
+  auto getMaterials() const { return materials_; }
+
 };

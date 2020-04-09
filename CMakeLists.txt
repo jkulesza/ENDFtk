@@ -389,6 +389,18 @@ if ( unit_tests )
 
 endif() 
 
+
+# python bindings
+add_subdirectory( dependencies/pybind11 )
+pybind11_add_module( py_ENDFtk python/ENDFtk.py.cpp )
+target_link_libraries( py_ENDFtk PUBLIC ENDFtk )
+set_target_properties( py_ENDFtk PROPERTIES
+                                 OUTPUT_NAME ENDFtk
+                                 )
+target_compile_options( py_ENDFtk PUBLIC "-std=c++17" )
+
+
+
 install( DIRECTORY src// DESTINATION include
          FILE_PERMISSIONS OWNER_READ OWNER_WRITE
                           GROUP_READ
