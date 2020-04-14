@@ -21,5 +21,10 @@ public:
   /* methods */
   int fileNo() const { return fileNo_; }
   int sectionNo() const { return sectionNo_; }
+  auto buffer() const {
+    return ranges::make_iterator_range( this->bufferLimits.first,
+                                        this->bufferLimits.second );
+  }
+  #include "ENDFtk/syntaxTree/GendfSection/src/parse.hpp"
 
 };

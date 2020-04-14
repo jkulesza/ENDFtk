@@ -35,7 +35,14 @@ PYBIND11_MODULE(ENDFtk, m) {
     .def_property_readonly("fileNumber",
                            &GendfSection::fileNo)
     .def_property_readonly("sectionNumber",
-                           &GendfSection::sectionNo);
+                           &GendfSection::sectionNo)
+    .def("parse", (const section::GendfType (GendfSection::*)())
+                  &GendfSection::parse)
+    .def("parse", (const section::GendfType (GendfSection::*)(long&))
+                  &GendfSection::parse);
 
+  py::class_< section::GendfType >(m, "GendfType")
+    .def_property_readonly("xs",
+                           &section::GendfType::xs);
 
 }

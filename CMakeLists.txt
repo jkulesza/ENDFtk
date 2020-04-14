@@ -386,6 +386,7 @@ if ( unit_tests )
     add_subdirectory( src/ENDFtk/syntaxTree/GendfTape/test )
     add_subdirectory( src/ENDFtk/syntaxTree/GendfMaterial/test )
     add_subdirectory( src/ENDFtk/syntaxTree/GendfSection/test )
+    add_subdirectory( src/ENDFtk/section/gendf/test )
 
 endif() 
 
