@@ -1,4 +1,9 @@
-class GendfTape {
+/* convenience alias */
+using GendfTape = Tape< std::string, gendf_tag >;
+
+/* specialized template */
+template<>
+class Tape< std::string, gendf_tag > {
 
 public:
   using BufferIterator = ranges::iterator_t< std::string >;

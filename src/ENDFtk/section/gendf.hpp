@@ -5,10 +5,10 @@ public:
 
 private:
   std::vector<ListRecord> list_records;
-  std::vector<double> _xs;
-  int _num_legendre;
-  int _num_sigma0;
-  double _temperature;
+  std::vector<double> xs_;
+  int num_legendre;
+  int num_sigma0;
+  double temperature_;
 
 protected:
   #include "ENDFtk/section/gendf/src/populateLists.hpp"
@@ -18,9 +18,9 @@ public:
 
   /* methods */
   const auto& lists() const { return this->list_records; }
-  const auto& xs() const { return _xs; }
-  double temperature() const { return _temperature; }
-  int numLegendre() const { return _num_legendre; }
-  int numSigma0() const { return _num_sigma0; }
+  const auto& xs() const { return xs_; }
+  double temperature() const { return temperature_; }
+  int numLegendre() const { return num_legendre; }
+  int numSigma0() const { return num_sigma0; }
 
 };

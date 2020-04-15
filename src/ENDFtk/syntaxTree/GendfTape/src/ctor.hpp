@@ -1,7 +1,7 @@
 /**
  * @brief
  */
-GendfTape( std::string buffer, long ln = 0 )
+Tape( std::string buffer, long ln = 0 )
   : buffer_(buffer) {
 
   Log::info( "Successfully got into GendfTape class." );

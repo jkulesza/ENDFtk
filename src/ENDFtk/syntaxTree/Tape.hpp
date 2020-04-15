@@ -1,5 +1,14 @@
+/* tag structs */
+struct endf_tag {};
+struct gendf_tag {};
+
+/* generic Tape class */
+template< typename Buffer, typename tag=endf_tag >
+class Tape;
+
+/* partial specialization of Tape for ENDF */
 template< typename Buffer >
-class Tape {
+class Tape< Buffer, endf_tag > {
   using BufferIterator = ranges::iterator_t< const Buffer >;
 public:
   /* convenience typedefs */
