@@ -26,7 +26,8 @@ SCENARIO( "testing creation of GENDF section object" ) {
 
       // construct object
       HeadRecord head( position, end, lineNo );
-      syntaxTree::GendfSection section( head, begin, position, end, lineNo );
+      syntaxTree::GendfSection< std::string::iterator>
+          section( head, begin, position, end, lineNo );
 
       THEN( "the whole stream is read" ) {
         CHECK( lineNo == 13 );
@@ -46,7 +47,7 @@ SCENARIO( "testing creation of GENDF section object" ) {
 
       THEN( "an exception is thrown upon construction" ) {
         HeadRecord head( position, end, lineNo );
-        CHECK_THROWS( syntaxTree::GendfSection(
+        CHECK_THROWS( syntaxTree::GendfSection< std::string::iterator >(
                         head, begin, position, end, lineNo ) );
       }
     }

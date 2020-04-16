@@ -1,9 +1,8 @@
-template< typename Iterator >
 void populateLists(HeadRecord& head,
-                    Iterator& begin,
-                    const Iterator& end,
-                    long& lineNumber,
-                    int MAT ) {
+                   BufferIterator& begin,
+                   const BufferIterator& end,
+                   long& lineNumber,
+                   int MAT ) {
 
   // first list record
   list_records.emplace_back(

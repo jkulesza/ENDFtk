@@ -1,7 +1,5 @@
+template< typename BufferIterator >
 class GendfType : protected Base {
-
-public:
-  using BufferIterator = ranges::iterator_t<std::string>;
 
 private:
   std::vector<ListRecord> list_records;

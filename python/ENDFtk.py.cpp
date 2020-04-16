@@ -33,9 +33,10 @@ auto toVector( const T2& view ) {
 PYBIND11_MODULE(ENDFtk, m) {
 
   using namespace syntaxTree;
-  using BufferIterator = ranges::iterator_t< std::string >;
+  using BufferIterator = ranges::iterator_t< const std::string >;
   using GM = GendfMaterial< BufferIterator >;
   using GS = GendfSection< BufferIterator >;
+  using GT = section::GendfType< BufferIterator >;
 
   py::class_< GendfTape >(m, "GendfTape")
     .def(py::init<std::string>())
@@ -59,13 +60,13 @@ PYBIND11_MODULE(ENDFtk, m) {
                            &GS::fileNo)
     .def_property_readonly("sectionNumber",
                            &GS::sectionNo)
-    .def("parse", (const section::GendfType (GS::*)())
+    .def("parse", (const GT (GS::*)())
                   &GS::parse)
-    .def("parse", (const section::GendfType (GS::*)(long&))
+    .def("parse", (const GT (GS::*)(long&))
                   &GS::parse);
 
-  py::class_< section::GendfType >(m, "GendfType")
+  py::class_< GT >(m, "GendfType")
     .def_property_readonly("xs",
-                           &section::GendfType::xs);
+                           &GT::xs);
 
 }

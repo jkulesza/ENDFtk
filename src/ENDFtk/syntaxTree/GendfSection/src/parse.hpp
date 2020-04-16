@@ -1,4 +1,4 @@
-section::GendfType const parse(long& lineNumber) {
+section::GendfType< BufferIterator > const parse(long& lineNumber) {
   auto position = this->buffer().begin();
   auto end = this->buffer().end();
 
@@ -6,7 +6,7 @@ section::GendfType const parse(long& lineNumber) {
   return { head, position, end, lineNumber, head.MAT() };
 }
 
-section::GendfType const parse() {
+section::GendfType< BufferIterator > const parse() {
   long lineNumber = 1;
   return this->parse(lineNumber);
 }

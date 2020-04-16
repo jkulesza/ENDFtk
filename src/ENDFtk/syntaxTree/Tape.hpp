@@ -1,6 +1,6 @@
 template< typename Buffer, typename tape_tag=endf_tag >
 class Tape {
-  using BufferIterator = ranges::iterator_t< Buffer >;
+  using BufferIterator = ranges::iterator_t< const Buffer >;
 public:
   /* convenience typedefs */
   using Material_t = Material< BufferIterator, tape_tag >;
