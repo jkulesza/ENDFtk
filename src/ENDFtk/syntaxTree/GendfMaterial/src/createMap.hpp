@@ -1,11 +1,11 @@
-static std::map< int, GendfSection > createMap(
+static std::map< int, Section_t > createMap(
     const HeadRecord& head,
     BufferIterator begin,
     BufferIterator& position,
     const BufferIterator& end,
     long& lineNumber ) {
 
-  std::map< int, GendfSection > sections;
+  std::map< int, Section_t > sections;
   int idx;
 
   // emplace first section

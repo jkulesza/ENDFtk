@@ -1,5 +1,10 @@
+/* generic class template */
+template< typename BufferIterator, typename matl_tag=endf_tag >
+class Material;
+
+/* ENDF Material */
 template< typename BufferIterator >
-class Material {
+class Material< BufferIterator, endf_tag > {
 public:
   /* convenience typedefs */
   using File_t = File< BufferIterator >;

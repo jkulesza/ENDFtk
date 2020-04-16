@@ -1,18 +1,9 @@
-/* tag structs */
-struct endf_tag {};
-struct gendf_tag {};
-
-/* generic Tape class */
-template< typename Buffer, typename tag=endf_tag >
-class Tape;
-
-/* partial specialization of Tape for ENDF */
-template< typename Buffer >
-class Tape< Buffer, endf_tag > {
-  using BufferIterator = ranges::iterator_t< const Buffer >;
+template< typename Buffer, typename tape_tag=endf_tag >
+class Tape {
+  using BufferIterator = ranges::iterator_t< Buffer >;
 public:
   /* convenience typedefs */
-  using Material_t = Material< BufferIterator >;
+  using Material_t = Material< BufferIterator, tape_tag >;
   
 protected:
   /* fields */
@@ -53,8 +44,11 @@ public:
   auto buffer() const { return this->buffer_ | ranges::view::all; }
 
   const TapeIdentification& TPID() const { return *( this->tpid ); }
+
 };
 
+/* convenient alias */
+using GendfTape = Tape< std::string, gendf_tag >;
 
 template< typename Range >
 auto makeTape( Range&& range ){

@@ -1,14 +1,14 @@
-class GendfMaterial {
-
-public:
-  /* convenience typedefs */
-  using BufferIterator = ranges::iterator_t< std::string >;
+/* GendfMaterial */
+template< typename BufferIterator >
+class Material< BufferIterator, gendf_tag > {
 
 protected:
 
+  using Section_t = GendfSection< BufferIterator >;
+
   /* fields */
   int materialNo;
-  std::map< int, GendfSection > sections_;
+  std::map< int, Section_t > sections_;
   std::pair< BufferIterator, BufferIterator > bufferLimits;
 
   /* methods */
@@ -45,3 +45,8 @@ public:
   int getMaterialNumber() const { return materialNo; }
 
 };
+
+/* convenience alias */
+template< typename BufferIterator >
+using GendfMaterial = Material< BufferIterator, gendf_tag >;
+

@@ -1,8 +1,5 @@
+template< typename BufferIterator >
 class GendfSection {
-
-public:
-  /* convenience typedefs */
-  using BufferIterator = ranges::iterator_t< std::string >;
 
 protected:
   /* fields */

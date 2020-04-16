@@ -27,7 +27,8 @@ SCENARIO( "testing creation of GENDF material object" ) {
 
       // construct object
       HeadRecord head( position, end, lineNo );
-      syntaxTree::GendfMaterial matl( head, begin, position, end, lineNo );
+      syntaxTree::GendfMaterial<std::string::iterator>
+          matl( head, begin, position, end, lineNo );
 
       THEN( "the whole stream is read" ) {
         CHECK( lineNo == 14 );
