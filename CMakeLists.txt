@@ -393,7 +393,11 @@ endif()
 
 # python bindings
 add_subdirectory( dependencies/pybind11 )
-pybind11_add_module( py_ENDFtk python/ENDFtk.py.cpp )
+pybind11_add_module( py_ENDFtk python/ENDFtk.py.cpp
+                               python/syntaxTree.py.cpp
+                               python/syntaxTree.GENDF.py.cpp
+                               python/section.3.py.cpp )
+target_include_directories( py_ENDFtk PUBLIC python )
 target_link_libraries( py_ENDFtk PUBLIC ENDFtk )
 set_target_properties( py_ENDFtk PROPERTIES
                                  OUTPUT_NAME ENDFtk
