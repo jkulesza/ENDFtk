@@ -39,3 +39,7 @@ subprojects
 # python
 __pycache__
 *.pyc
+
+# pybind
+python/test/.ipynb_checkpoints
+python/test/resources

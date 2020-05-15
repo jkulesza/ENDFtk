@@ -39,13 +39,32 @@ void py_section_6(py::module &m) {
     .def_property_readonly("distribution", &ReactionProduct::distribution)
   ;
 
+  /* LAW 1 namespace */
+  py::module m_law1 = m.def_submodule("LAW1");
+  using LAW1 = Type_6_t::ContinuumEnergyAngle;
+  using SubSection1 = LAW1::SubSection;
+
+  py::class_< LAW1 >(m_law1, "ContinuumEnergyAngle", py::dynamic_attr())
+    .def_property_readonly("LAW", &LAW1::LAW)
+    .def_property_readonly("subsections",
+                           [](LAW1& law) {
+                             return law.subsections() | ranges::to_vector;
+                           })
+  ;
+
+  py::class_< SubSection1 >(m_law1, "SubSection")
+    .def_property_readonly("energy", &SubSection1::energy)
+    .def_property_readonly("LANG", &SubSection1::LANG)
+    .def_property_readonly("data", &SubSection1::data)
+  ;
+
   /* LAW 2 namespace */
   py::module m_law2 = m.def_submodule("LAW2");
   using LAW2 = Type_6_t::DiscreteTwoBodyScattering;
   using SubSection = LAW2::SubSection;
   using LegendreCoefficients = LAW2::LegendreCoefficients;
 
-  py::class_< LAW2 >(m_law2, "DiscreteTwoBodyScattering")
+  py::class_< LAW2 >(m_law2, "DiscreteTwoBodyScattering", py::dynamic_attr())
     .def_property_readonly("LAW", &LAW2::LAW)
     .def_property_readonly("subsections",
                            [](LAW2& law) {
@@ -79,7 +98,8 @@ void py_section_6(py::module &m) {
   using LegendreCoefficients5 = LAW5::LegendreCoefficients;
   using NuclearAmplitudeExpansion = LAW5::NuclearAmplitudeExpansion;
 
-  py::class_< LAW5 >(m_law5, "ChargedParticleElasticScattering")
+  py::class_< LAW5 >(m_law5, "ChargedParticleElasticScattering",
+                     py::dynamic_attr())
     .def_property_readonly("LAW", &LAW5::LAW)
     .def_property_readonly("LIDP", &LAW5::LIDP)
     .def_property_readonly("identicalParticles", &LAW5::identicalParticles)
@@ -124,6 +144,24 @@ void py_section_6(py::module &m) {
                              return nae.imaginaryInterferenceCoefficients()
                                | ranges::to_vector;
                            })
+  ;
+
+  /* LAW 7 namespace */
+  py::module m_law7 = m.def_submodule("LAW7");
+  using LAW7 = Type_6_t::LaboratoryAngleEnergy;
+  using AngularDistribution = LAW7::AngularDistribution;
+
+  py::class_< LAW7 >(m_law7, "LaboratoryAngleEnergy", py::dynamic_attr())
+    .def_property_readonly("LAW", &LAW7::LAW)
+    .def_property_readonly("angularDistributions",
+                           [](LAW7& law) {
+                             return law.angularDistributions()
+                               | ranges::to_vector;
+                           })
+  ;
+
+  py::class_< AngularDistribution >(m_law7, "AngularDistribution")
+    .def_property_readonly("energy", &AngularDistribution::energy)
   ;
 
 }

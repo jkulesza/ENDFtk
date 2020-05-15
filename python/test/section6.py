@@ -11,9 +11,9 @@ import patch
 def main():
 
     # import and parse ENDF section
-    with open('li6.endf', 'r') as f:
+    with open('resources/tape20', 'r') as f:
         tape = ENDFtk.Tape(f.read())
-    section = tape.materials[0].MF(6).MT(105).parse6()
+    section = tape.materials[0].MF(6).MT(16).parse(6)
 
     print( type(section) )
     print( type(section.products[0]) )
