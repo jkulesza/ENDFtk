@@ -9,6 +9,8 @@ def _parse_section(self, mf):
     switcher = {
         1: self.parse1,
         3: self.parse3,
+        4: self.parse4,
+        # 5: self.parse5,
         6: self.parse6
     }
 
@@ -18,7 +20,14 @@ def _parse_section(self, mf):
         print( "%i not in switcher!" )
         raise e
 
+def _section_len(self):
+    """ Return number of lines in a Section. """
+
+    buffer_ = self.buffer
+    return len(buffer_.split('\n'))
+
 Section.parse = _parse_section
+Section.__len__ = _section_len
 
 
 #######################################################################
@@ -58,3 +67,28 @@ for myclass in [LAW1.ContinuumEnergyAngle,
                 LAW5.ChargedParticleElasticScattering]:
     myclass.energies = property(_energies_from_subsections)
 LAW7.LaboratoryAngleEnergy.enegies = property(_law7_energies)
+
+
+#######################################################################
+from ENDFtk import Type4
+
+def _energies_from_distributions(self):
+    if not hasattr(self, '_energies'):
+        if self.LTT == 0:
+            self._energies = None
+        else:
+            self._energies = [s.incidentEnergy for s in self.distributions]
+
+    return self._energies
+
+
+def _get_distributions(self):
+
+    if self.LTT == 0:
+        return self._distributions
+
+    else:
+        return self._distributions.angularDistributions
+
+Type4.distributions = property(_get_distributions)
+Type4.energies = property(_energies_from_distributions)

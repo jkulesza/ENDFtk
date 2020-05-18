@@ -10,6 +10,7 @@ void py_syntaxTree(py::module &m);
 // void py_syntaxTree_GENDF(py::module &m);
 void py_section_1(py::module &m);
 void py_section_3(py::module &m);
+void py_section_4(py::module &m);
 void py_section_6(py::module &m);
 void py_file_3(py::module &m);
 
@@ -23,6 +24,7 @@ PYBIND11_MODULE(ENDFtk, m) {
   // py_syntaxTree_GENDF(m);
   py_section_1(m);
   py_section_3(m);
+  py_section_4(m);
   py_section_6(m);
   py_file_3(m);
 }
