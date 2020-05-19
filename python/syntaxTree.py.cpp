@@ -17,6 +17,7 @@ void py_syntaxTree(py::module &m) {
   using Type_1_t = section::Type< 1, 451 >;
   using Type_3_t = section::Type< 3 >;
   using Type_4_t = section::Type< 4 >;
+  using Type_5_t = section::Type< 5 >;
   using Type_6_t = section::Type< 6 >;
   using File_3_t = file::Type< 3 >;
 
@@ -82,6 +83,10 @@ void py_syntaxTree(py::module &m) {
                    &Section_t::parse<4>)
     .def("parse4", (Type_4_t (Section_t::*)(long&) const)
                    &Section_t::parse<4>)
+    .def("parse5", (Type_5_t (Section_t::*)() const)
+                   &Section_t::parse<5>)
+    .def("parse5", (Type_5_t (Section_t::*)(long&) const)
+                   &Section_t::parse<5>)
     .def("parse6", (Type_6_t (Section_t::*)() const)
                    &Section_t::parse<6>)
     .def("parse6", (Type_6_t (Section_t::*)(long&) const)

@@ -1,5 +1,18 @@
 """ Patch file for ENDFtk """
 
+
+#######################################################################
+from ENDFtk import Tape
+
+def _parse_section_from_tape(self, material=0, mf=3, mt=1):
+    """ Interface routine to parse a section directly from a tape. """
+
+    section = self.materials[material].MF(mf).MT(mt)
+    return section.parse(mf)
+
+Tape.parse = _parse_section_from_tape
+
+
 #######################################################################
 from ENDFtk import Section
 
@@ -10,7 +23,7 @@ def _parse_section(self, mf):
         1: self.parse1,
         3: self.parse3,
         4: self.parse4,
-        # 5: self.parse5,
+        5: self.parse5,
         6: self.parse6
     }
 

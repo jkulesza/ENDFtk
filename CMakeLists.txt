@@ -940,6 +940,7 @@ pybind11_add_module( pyENDFtk python/ENDFtk.py.cpp
                                python/section.1.py.cpp
                                python/section.3.py.cpp
                                python/section.4.py.cpp
+                               python/section.5.py.cpp
                                python/section.6.py.cpp
                                python/file.3.py.cpp )
 target_include_directories( pyENDFtk PUBLIC python )
