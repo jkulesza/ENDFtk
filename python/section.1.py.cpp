@@ -12,6 +12,9 @@ void py_section_1(py::module &m) {
   using Type_1_t = section::Type< 1, 451 >;
 
   py::class_< Type_1_t >(m, "Type1")
+    .def_property_readonly("MT", [](Type_1_t& type) { return type.MT(); })
+    .def_property_readonly("ZA", [](Type_1_t& type) { return type.ZA(); })
+    .def_property_readonly("AWR", [](Type_1_t& type) { return type.AWR(); })
     .def_property_readonly("LRP", &Type_1_t::LRP)
     .def_property_readonly("LFI", &Type_1_t::LFI)
     .def_property_readonly("NLIB", &Type_1_t::NLIB)
@@ -30,12 +33,12 @@ void py_section_1(py::module &m) {
     .def_property_readonly("LDRV", &Type_1_t::LDRV)
     .def_property_readonly("NWD", &Type_1_t::NWD)
     .def_property_readonly("NXC", &Type_1_t::NXC)
-    .def_property_readonly("index", 
+    .def_property_readonly("index",
                            [](Type_1_t& type) {
                              return type.index() | ranges::to_vector;
                            })
     .def_property_readonly("NC", &Type_1_t::NC)
-    .def_property_readonly("description", 
+    .def_property_readonly("description",
                            [](Type_1_t& type) {
                              return type.description()
                                | ranges::to_<std::string>();
