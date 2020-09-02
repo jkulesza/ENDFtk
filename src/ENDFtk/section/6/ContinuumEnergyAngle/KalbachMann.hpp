@@ -23,6 +23,7 @@ public:
   using Base::energies;
   using Base::totalEmissionProbabilities;
   auto parameters() const { return Base::data(); }
+  auto listData() const { return Base::list(); }
 
   using Base::NC;
   using Base::print;

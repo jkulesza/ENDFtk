@@ -21,6 +21,8 @@ public:
   auto data() const {
     return ListRecord::list() | ranges::view::chunk( 2 + this->NA() )
                               | ranges::view::transform( ranges::view::tail ); }
+  auto list() const {
+    return ListRecord::list() | ranges::view::all; }
 
 private:
 

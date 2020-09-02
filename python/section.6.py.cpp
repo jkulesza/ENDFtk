@@ -42,7 +42,6 @@ void py_section_6(py::module &m) {
   /* LAW 1 namespace */
   py::module m_law1 = m.def_submodule("LAW1");
   using LAW1 = Type_6_t::ContinuumEnergyAngle;
-  using SubSection1 = LAW1::SubSection;
 
   py::class_< LAW1 >(m_law1, "ContinuumEnergyAngle", py::dynamic_attr())
     .def_property_readonly("LAW", &LAW1::LAW)
@@ -52,17 +51,62 @@ void py_section_6(py::module &m) {
                            })
   ;
 
-  py::class_< SubSection1 >(m_law1, "SubSection")
-    .def_property_readonly("energy", &SubSection1::energy)
-    .def_property_readonly("LANG", &SubSection1::LANG)
-    .def_property_readonly("data", &SubSection1::data)
+  py::class_< LAW1::SubSection >(m_law1, "SubSection")
+    .def_property_readonly( "energy", &LAW1::SubSection::energy )
+    .def_property_readonly( "LANG", &LAW1::SubSection::LANG )
+    .def_property_readonly( "data", &LAW1::SubSection::data )
+    .def_property_readonly( "numberDiscreteEnergies",
+                            &LAW1::SubSection::numberDiscreteEnergies )
+    .def_property_readonly( "numberAngularParameters",
+                            &LAW1::SubSection::numberAngularParameters )
+    .def_property_readonly( "numberSecondaryEnergies",
+                            &LAW1::SubSection::numberSecondaryEnergies )
   ;
+
+  py::class_< LAW1::LegendreCoefficients >( m_law1, "LegendreCoefficients" );
+
+  py::class_< LAW1::KalbachMann >( m_law1, "KalbachMann" )
+    .def_property_readonly( "energy",
+                            []( LAW1::KalbachMann& law ) {
+                              return law.energy();
+                            } )
+    .def_property_readonly( "numberDiscreteEnergies",
+                            []( LAW1::KalbachMann& law ) {
+                              return law.numberDiscreteEnergies();
+                            } )
+    .def_property_readonly( "numberAngularParameters",
+                            []( LAW1::KalbachMann& law ) {
+                              return law.numberAngularParameters();
+                            } )
+    .def_property_readonly( "numberSecondaryEnergies",
+                            []( LAW1::KalbachMann& law ) {
+                              return law.numberAngularParameters();
+                            } )
+    .def_property_readonly( "energies",
+                            []( LAW1::KalbachMann& law ) {
+                              return law.energies() | ranges::to_vector;
+                            } )
+    .def_property_readonly( "totalEmissionProbabilities",
+                            []( LAW1::KalbachMann& law ) {
+                              return law.totalEmissionProbabilities()
+                                | ranges::to_vector;
+                            } )
+    .def_property_readonly( "list",
+                            []( LAW1::KalbachMann& law ) {
+                              return law.listData()
+                                | ranges::to_vector;
+                            } )
+  ;
+
+  py::class_< LAW1::Tabulated >( m_law1, "Tabulated" );
+
 
   /* LAW 2 namespace */
   py::module m_law2 = m.def_submodule("LAW2");
   using LAW2 = Type_6_t::DiscreteTwoBodyScattering;
   using SubSection = LAW2::SubSection;
   using LegendreCoefficients = LAW2::LegendreCoefficients;
+  using Tabulated = LAW2::Tabulated;
 
   py::class_< LAW2 >(m_law2, "DiscreteTwoBodyScattering", py::dynamic_attr())
     .def_property_readonly("LAW", &LAW2::LAW)
@@ -90,6 +134,21 @@ void py_section_6(py::module &m) {
                            })
   ;
 
+  py::class_< Tabulated >(m_law2, "Tabulated")
+    .def_property_readonly("energy", &Tabulated::energy)
+    .def_property_readonly("LANG", &Tabulated::LANG)
+    .def_property_readonly("NL", &Tabulated::NL)
+    .def_property_readonly("numberCosines", &Tabulated::numberCosines)
+    .def_property_readonly("cosines",
+                           [](Tabulated& tab) {
+                             return tab.cosines() | ranges::to_vector;
+                           })
+    .def_property_readonly("probabilities",
+                           [](Tabulated& tab) {
+                             return tab.probabilities() | ranges::to_vector;
+                           })
+  ;
+
 
   /* LAW 5 namespace */
   py::module m_law5 = m.def_submodule("LAW5");
@@ -97,12 +156,15 @@ void py_section_6(py::module &m) {
   using SubSection5 = LAW5::SubSection;
   using LegendreCoefficients5 = LAW5::LegendreCoefficients;
   using NuclearAmplitudeExpansion = LAW5::NuclearAmplitudeExpansion;
+  using NuclearPlusInterference = LAW5::NuclearPlusInterference;
 
   py::class_< LAW5 >(m_law5, "ChargedParticleElasticScattering",
                      py::dynamic_attr())
     .def_property_readonly("LAW", &LAW5::LAW)
     .def_property_readonly("LIDP", &LAW5::LIDP)
     .def_property_readonly("identicalParticles", &LAW5::identicalParticles)
+    .def_property_readonly("SPI", &LAW5::SPI)
+    .def_property_readonly("spin", &LAW5::spin)
     .def_property_readonly("subsections",
                            [](LAW5& law) {
                              return law.subsections() | ranges::to_vector;
@@ -142,6 +204,21 @@ void py_section_6(py::module &m) {
     .def_property_readonly("imaginaryInterferenceCoefficients",
                            [](NuclearAmplitudeExpansion& nae) {
                              return nae.imaginaryInterferenceCoefficients()
+                               | ranges::to_vector;
+                           })
+  ;
+
+  py::class_< NuclearPlusInterference >(m_law5, "NuclearPlusInterference")
+    .def_property_readonly("energy", &NuclearPlusInterference::energy)
+    .def_property_readonly("LTP",    &NuclearPlusInterference::LTP)
+    .def_property_readonly("cosines",
+                           [](NuclearPlusInterference& foo) {
+                             return foo.cosines()
+                               | ranges::to_vector;
+                           })
+    .def_property_readonly("probabilities",
+                           [](NuclearPlusInterference& foo) {
+                             return foo.probabilities()
                                | ranges::to_vector;
                            })
   ;
