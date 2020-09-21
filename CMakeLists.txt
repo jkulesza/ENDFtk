@@ -931,6 +931,9 @@ if( NOT is_subproject )
 endif()
 
 # python bindings
+set( CMAKE_CXX_STANDARD 17 )
+set( CMAKE_CXX_STANDARD_REQUIRED YES )
+
 add_subdirectory( subprojects/pybind11 )
 pybind11_add_module( pyENDFtk python/ENDFtk.py.cpp
                                python/TapeIdentification.py.cpp
@@ -948,7 +951,6 @@ target_link_libraries( pyENDFtk PUBLIC ENDFtk )
 set_target_properties( pyENDFtk PROPERTIES
                                  OUTPUT_NAME ENDFtk
                                  )
-target_compile_options( pyENDFtk PUBLIC "-std=c++17" )
 
 # installation
 install( FILES "${CMAKE_BINARY_DIR}/signature.json"
