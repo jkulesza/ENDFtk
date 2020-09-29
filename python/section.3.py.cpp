@@ -2,6 +2,8 @@
 #include <pybind11/stl.h>
 
 #include "ENDFtk.hpp"
+#include "Sequence.hpp"
+
 
 namespace py = pybind11;
 using namespace njoy::ENDFtk;
@@ -26,19 +28,19 @@ void py_section_3(py::module &m) {
     .def_property_readonly("NR", &Type_3_t::NR)
     .def_property_readonly("NP", &Type_3_t::NP)
     .def_property_readonly("NC", &Type_3_t::NC)
-    .def_property_readonly("interpolants", 
+    .def_property_readonly("interpolants",
                            [](Type_3_t& type) {
                              return type.interpolants() | ranges::to_vector;
                            })
-    .def_property_readonly("boundaries", 
+    .def_property_readonly("boundaries",
                            [](Type_3_t& type) {
                              return type.boundaries() | ranges::to_vector;
                            })
-    .def_property_readonly("energies", 
-                           [](Type_3_t& type) {
-                             return type.energies() | ranges::to_vector;
+    .def_property_readonly("energies",
+                           [](Type_3_t& type) -> RandomAccessAnyView< double > {
+                             return type.energies();
                            })
-    .def_property_readonly("crossSections", 
+    .def_property_readonly("crossSections",
                            [](Type_3_t& type) {
                              return type.crossSections() | ranges::to_vector;
                            })
