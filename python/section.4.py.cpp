@@ -31,6 +31,14 @@ void py_section_4(py::module &m) {
     .def_property_readonly("E", &LegendreCoefficients::E)
     .def_property_readonly("incidentEnergy",
                            &LegendreCoefficients::incidentEnergy)
+    .def_property_readonly("NL", &LegendreCoefficients::NL)
+    .def_property_readonly("legendreOrder",
+                           &LegendreCoefficients::legendreOrder)
+    .def_property_readonly("coefficients",
+                           [] (LegendreCoefficients& self) {
+                             return self.coefficients()
+                               | ranges::to_vector;
+                           })
   ;
 
   using TabulatedDistribution = Type_4_t::TabulatedDistribution;
