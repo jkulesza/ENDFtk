@@ -59,11 +59,13 @@ target_link_libraries( ENDFtk
     INTERFACE Log
     INTERFACE catch-adapter
     INTERFACE disco
-    INTERFACE hana-adapter
+    INTERFACE hana
     INTERFACE header-utilities
     INTERFACE range-v3-adapter
     )
 
+  set_target_properties( check hana_check PROPERTIES EXCLUDE_FROM_ALL 1
+    EXCLUDE_FROM_DEFAULT_BUILD 1 )
 
 #######################################################################
 # Top-level Only

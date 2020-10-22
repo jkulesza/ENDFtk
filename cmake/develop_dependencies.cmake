@@ -48,7 +48,7 @@ FetchContent_MakeAvailable(
     Log
     catch-adapter
     disco
-    hana-adapter
+    hana
     header-utilities
     range-v3-adapter
     )

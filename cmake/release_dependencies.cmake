@@ -15,14 +15,9 @@ FetchContent_Declare( disco
     GIT_TAG         178a03cf4a571fee028b008ffac85e20f6059ade
     )
 
-FetchContent_Declare( fmt-adapter
-    GIT_REPOSITORY  http://github.com/njoy/fmt-adapter
-    GIT_TAG         a6db6c8cf9534b028eb3dea4549934f7ae6abf9f
-    )
-
-FetchContent_Declare( hana-adapter
-    GIT_REPOSITORY  https://github.com/njoy/hana-adapter
-    GIT_TAG         f58e8973c9a614dc4f3720b5581a762c61bdbb40
+FetchContent_Declare( hana
+    GIT_REPOSITORY  https://github.com/boostorg/hana.git
+    GIT_TAG         07b42492765f7384e053c4761f4d0eda32b75834
     )
 
 FetchContent_Declare( header-utilities
@@ -32,7 +27,7 @@ FetchContent_Declare( header-utilities
 
 FetchContent_Declare( Log
     GIT_REPOSITORY  https://github.com/njoy/Log
-    GIT_TAG         e0f371dfef22b655bbd52e8783d037e6c594824a
+    GIT_TAG         9e99c58ab5745a4e6053ec2b92a1619295284804
     )
 
 FetchContent_Declare( range-v3-adapter
@@ -40,10 +35,12 @@ FetchContent_Declare( range-v3-adapter
     GIT_TAG         4d1a3bde6aba47ca59a65713f9cab7877ad2cc87
     )
 
-FetchContent_Declare( spdlog-adapter
-    GIT_REPOSITORY  http://github.com/njoy/spdlog-adapter
-    GIT_TAG         39cd17919b2be662a45b9c33342b5a5f4f1feb4c
+FetchContent_Declare( spdlog
+    GIT_REPOSITORY  https://github.com/gabime/spdlog.git
+    GIT_TAG         a51b4856377a71f81b6d74b9af459305c4c644f8
+    GIT_SHALLOW     TRUE
     )
+set( SPDLOG_BUILD_TESTING CACHE BOOL OFF )
 
 #######################################################################
 # Load dependencies
@@ -52,10 +49,9 @@ FetchContent_Declare( spdlog-adapter
 FetchContent_MakeAvailable(
     catch-adapter
     disco
-    fmt-adapter
-    hana-adapter
+    hana
     header-utilities
     Log
     range-v3-adapter
-    spdlog-adapter
+    spdlog
     )
