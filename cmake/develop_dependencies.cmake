@@ -7,7 +7,7 @@ include( FetchContent )
 
 FetchContent_Declare( Log
     GIT_REPOSITORY  https://github.com/njoy/Log
-    GIT_TAG         origin/build/fetchcontent
+    GIT_TAG         origin/removeAdapters
     GIT_SHALLOW     TRUE
     )
 
@@ -23,10 +23,9 @@ FetchContent_Declare( disco
     GIT_SHALLOW     TRUE
     )
 
-FetchContent_Declare( hana-adapter
-    GIT_REPOSITORY  https://github.com/njoy/hana-adapter
-    GIT_TAG         origin/build/fetchcontent
-    GIT_SHALLOW     TRUE
+FetchContent_Declare( hana
+    GIT_REPOSITORY  https://github.com/boostorg/hana.git
+    GIT_TAG         07b42492765f7384e053c4761f4d0eda32b75834
     )
 
 FetchContent_Declare( header-utilities
